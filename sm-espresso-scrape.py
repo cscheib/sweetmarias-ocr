@@ -9,6 +9,16 @@
 #   - get_image(image_uri) - returns image as Bytes object
 #   - variety_score(image_bytes) - returns score as an integer or maybe float(?)
 
+# TODO: output to terminal in more useful formats (JSON, CSV)
+# TODO: try other categories, possibly main list
+# TODO: optimize - runs a bit slowly
+# TODO: make regex more flexible but precise
+# TODO: grab full decimal number
+# TODO: sort by score
+# TODO: represent data in a structured format in-script
+# TODO: create score-per-dollar metric
+# TODO: add price/lb, possibly other volumes
+
 
 import requests
 from bs4 import BeautifulSoup
@@ -76,6 +86,8 @@ def get_image_file(image_file):
 
 ########################
 
+print('"Variety Name","Score"')
+
 for coffee in category_parse(category):
     if debug:
         print("Variety URI: " + coffee)
@@ -84,6 +96,4 @@ for coffee in category_parse(category):
         print("Variety Name: " + variety_name(coffee))
         print("=================")
     else:
-        print("Variety Name: " + variety_name(coffee))
-        print("Score: " + variety_score(get_image_uri(variety_parse(coffee))))
-        print("=================")
+        print(variety_name(coffee) + "," + variety_score(get_image_uri(variety_parse(coffee))))
